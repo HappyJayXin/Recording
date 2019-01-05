@@ -28,6 +28,7 @@ let vm = new Vue({
       const {name, episode, hour, minute} = this.input
       if (name !== '' && episode !== null && hour !== null && minute !== null) {
         this.fromData.error = false
+        this.contents = this.contents || []
         this.contents.push(this.input)
 
         $('#newDataModal').modal('hide')
@@ -133,7 +134,10 @@ let vm = new Vue({
     }
   },
   mounted() {
+    // localStorage.clear()
     // Get localStorage data
-    this.contents = JSON.parse(localStorage.getItem('RecordData'))
+    if (localStorage.getItem('RecordData')) {
+      this.contents = JSON.parse(localStorage.getItem('RecordData'))
+    }
   }
 })
