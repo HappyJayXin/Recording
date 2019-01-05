@@ -35,7 +35,8 @@
           >
             <div class="row align-self-center">
               <h2
-                class="titlename col-md-5 text-center"
+                class="col-md-5 text-center"
+                :class="haveVideo(index)"
                 @click="handleOpenVideo(index)"
               >
                 {{ item.name }}
@@ -139,6 +140,7 @@
                   <label for="url">輸入網址</label>
                   <input
                     id="url"
+                    type="url"
                     class="form-control"
                     placeholder="網址"
                     v-model.trim="input.url"

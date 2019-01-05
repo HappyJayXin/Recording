@@ -31,7 +31,7 @@ let data = {
       episode: 1,
       hour: '0',
       minute: '0',
-      url: 'https://bootstrap.hexschool.com/docs/4.1/components/buttons/'
+      url: ''
     }
   ]
 }
@@ -46,13 +46,16 @@ let vm = new Vue({
         this.fromData.error = false
         this.contents.push(this.input)
         $('#newDataModal').modal('hide')
+        this.claerInput()
       } else {
         this.fromData.error = true
       }
-      this.claerInput()
+      $('#newDataModal').on('hide.bs.modal', () => {
+        this.fromData.error = false
+      })
     },
     openEditView(i) {
-      // 只顯示修改按鈕
+      // Show only the edit button
       this.buttonState = {
         edit: true,
         add: false,
@@ -73,7 +76,7 @@ let vm = new Vue({
       })
     },
     handleEdit() {
-      // 只顯示新增按鈕
+      // Show only add buttons
       this.buttonState.edit = false
       this.buttonState.add = true
       this.contents[this.buttonState.index] = this.input
@@ -86,12 +89,16 @@ let vm = new Vue({
     handleClear() {
       this.claerInput()
     },
+    // Open new window
     handleOpenVideo(i) {
-      window.open(this.contents[i].url)
+      const url = this.contents[i].url
+      if (!url) return
+      window.open(url)
     },
     clearForm() {
-      // 離開時清空input
+      // when leave clear input data
       $('#newDataModal').on('hide.bs.modal', () => {
+        this.fromData.error = false
         this.claerInput()
       })
     },
@@ -103,9 +110,15 @@ let vm = new Vue({
         minute: null,
         url: ''
       }
+    },
+    haveVideo(i) {
+      return {
+        underLine: this.contents[i].url
+      }
     }
   },
   computed: {
+    // put data to select option
     makeEpisode() {
       for (let i = 1; i <= 60; i++) {
         this.fromData.episode.push(i)
