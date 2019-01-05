@@ -2,6 +2,10 @@
 body {
   font-family: 'cwTeXYen', sans-serif;
 }
+::selection {
+  background: rgba(236, 240, 241, 0.5);
+  color: #000;
+}
 .underLine {
   cursor: pointer;
   text-decoration: underline;

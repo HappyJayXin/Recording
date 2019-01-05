@@ -17,23 +17,7 @@ let data = {
     minute: null,
     url: ''
   },
-  contents: [
-    {
-      name: '黑騎士',
-      episode: 1,
-      hour: '0',
-      minute: '0',
-      url:
-        'https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_open'
-    },
-    {
-      name: '絕命毒師',
-      episode: 1,
-      hour: '0',
-      minute: '0',
-      url: ''
-    }
-  ]
+  contents: []
 }
 
 let vm = new Vue({
@@ -45,8 +29,10 @@ let vm = new Vue({
       if (name !== '' && episode !== null && hour !== null && minute !== null) {
         this.fromData.error = false
         this.contents.push(this.input)
+
         $('#newDataModal').modal('hide')
         this.claerInput()
+        this.saveDataToLocalStorage()
       } else {
         this.fromData.error = true
       }
@@ -80,11 +66,14 @@ let vm = new Vue({
       this.buttonState.edit = false
       this.buttonState.add = true
       this.contents[this.buttonState.index] = this.input
+
       this.claerInput()
       $('#newDataModal').modal('hide')
+      this.saveDataToLocalStorage()
     },
     handleDelete(i) {
       if (window.confirm('確定刪除嗎?')) this.contents.splice(i, 1)
+      this.saveDataToLocalStorage()
     },
     handleClear() {
       this.claerInput()
@@ -111,10 +100,15 @@ let vm = new Vue({
         url: ''
       }
     },
+    // If have set Url show underLine
     haveVideo(i) {
       return {
         underLine: this.contents[i].url
       }
+    },
+    // Save data to LocalStorage
+    saveDataToLocalStorage() {
+      localStorage.setItem('RecordData', JSON.stringify(this.contents))
     }
   },
   computed: {
@@ -137,5 +131,9 @@ let vm = new Vue({
       }
       return this.fromData.minute
     }
+  },
+  mounted() {
+    // Get localStorage data
+    this.contents = JSON.parse(localStorage.getItem('RecordData'))
   }
 })
