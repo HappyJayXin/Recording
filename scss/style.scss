@@ -1,9 +1,18 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+// Vue set
 [v-cloak] {
   display: none;
 }
+
+// box
+$boxHeight: 200;
+$boxWeight: 70;
+// animate
+$rotate: (3#{deg}, 0#{deg}, -3#{deg});
+
 body {
   font-family: 'cwTeXYen', sans-serif;
+  font-size: 1rem;
 }
 ::selection {
   background: rgba(236, 240, 241, 0.5);
@@ -12,4 +21,42 @@ body {
 .underLine {
   cursor: pointer;
   text-decoration: underline;
+}
+#nothings {
+  text-align: center;
+  width: #{$boxHeight}px;
+  height: #{$boxWeight}px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -#{$boxWeight/2}px 0 0 -#{$boxHeight/2}px;
+  font-size: 3rem;
+  color: #576574;
+  border: 1px solid #576574;
+  border-radius: 2px;
+  padding: 0 0.5rem;
+  animation: turn 3s infinite linear reverse;
+}
+@keyframes turn {
+  0% {
+    transform: rotate(nth($rotate, 1));
+  }
+  25% {
+    transform: rotate(nth($rotate, 2));
+  }
+  50% {
+    transform: rotate(nth($rotate, 3));
+  }
+  75% {
+    transform: rotate(nth($rotate, 2));
+  }
+  100% {
+    transform: rotate(nth($rotate, 1));
+  }
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

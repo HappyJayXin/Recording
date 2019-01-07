@@ -11,6 +11,7 @@ let data = {
     error: false
   },
   input: {
+    id: 0,
     name: '',
     episode: null,
     hour: null,
@@ -25,9 +26,11 @@ let vm = new Vue({
   data: data,
   methods: {
     handleAdd() {
-      const {name, episode, hour, minute} = this.input
+      const { name, episode, hour, minute } = this.input
       if (name !== '' && episode !== null && hour !== null && minute !== null) {
         this.fromData.error = false
+        // make id to li element
+        this.input.id = Math.floor(Math.random() * 100000)
         this.contents = this.contents || []
         this.contents.push(this.input)
 
@@ -48,7 +51,7 @@ let vm = new Vue({
         add: false,
         index: i
       }
-      const {name, episode, hour, minute, url} = this.contents[i]
+      const { name, episode, hour, minute, url } = this.contents[i]
       this.input = {
         name: name,
         episode: episode,
