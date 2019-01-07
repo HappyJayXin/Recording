@@ -51,8 +51,9 @@ let vm = new Vue({
         add: false,
         index: i
       }
-      const { name, episode, hour, minute, url } = this.contents[i]
+      const { id, name, episode, hour, minute, url } = this.contents[i]
       this.input = {
+        id: id,
         name: name,
         episode: episode,
         hour: hour,
