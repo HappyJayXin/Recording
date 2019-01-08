@@ -27,7 +27,7 @@ let vm = new Vue({
   methods: {
     handleAdd() {
       const { name, episode, hour, minute } = this.input
-      if (name !== '' && episode !== null && hour !== null && minute !== null) {
+      if (name !== '' && episode !== '' && hour !== null && minute !== null) {
         this.fromData.error = false
         // make id to li element
         this.input.id = Math.floor(Math.random() * 100000)
@@ -67,14 +67,20 @@ let vm = new Vue({
       })
     },
     handleEdit() {
-      // Show only add buttons
-      this.buttonState.edit = false
-      this.buttonState.add = true
-      this.contents[this.buttonState.index] = this.input
+      const { name, episode, hour, minute } = this.input
+      if (name !== '' && episode !== '' && hour !== null && minute !== null) {
+        this.fromData.error = false
+        // Show only add buttons
+        this.buttonState.edit = false
+        this.buttonState.add = true
+        this.contents[this.buttonState.index] = this.input
 
-      this.claerInput()
-      $('#newDataModal').modal('hide')
-      this.saveDataToLocalStorage()
+        this.claerInput()
+        $('#newDataModal').modal('hide')
+        this.saveDataToLocalStorage()
+      } else {
+        this.fromData.error = true
+      }
     },
     handleDelete(i) {
       if (window.confirm('確定刪除嗎?')) this.contents.splice(i, 1)
@@ -118,12 +124,6 @@ let vm = new Vue({
   },
   computed: {
     // put data to select option
-    makeEpisode() {
-      for (let i = 1; i <= 60; i++) {
-        this.fromData.episode.push(i)
-      }
-      return this.fromData.episode
-    },
     makeHour() {
       for (let i = 0; i <= 3; i++) {
         this.fromData.hour.push(i)
