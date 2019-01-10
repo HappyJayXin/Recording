@@ -116,16 +116,16 @@
                     <button
                       type="button"
                       class="btn btn-outline-secondary"
-                      @click="input.episode++"
+                      @click="input.episode > 1 ? input.episode-- : 1"
                     >
-                      +
+                      -
                     </button>
                     <button
                       type="button"
                       class="btn btn-outline-secondary"
-                      @click="input.episode > 1 ? input.episode-- : 1"
+                      @click="input.episode++"
                     >
-                      -
+                      +
                     </button>
                   </div>
                 </div>
