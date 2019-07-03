@@ -1,4 +1,6 @@
 let data = {
+  drag_enabled: false,
+  dragging: false,
   buttonState: {
     edit: false,
     add: true,
@@ -23,7 +25,9 @@ let data = {
 
 let vm = new Vue({
   el: '#app',
-  data: data,
+  data() {
+    return data
+  },
   methods: {
     handleAdd() {
       const { name, episode, hour, minute } = this.input
