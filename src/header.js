@@ -1,6 +1,6 @@
 Vue.component('header-component', {
   template: `
-  <nav class="navbar navbar-light bg-light">
+  <nav class="navbar navbar-light bg-light position-sticky fixed-top">
     <h1 class="mb-0">紀錄時間</h1>
     <div>
       <button
