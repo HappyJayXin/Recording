@@ -15,9 +15,9 @@ let data = {
   input: {
     id: 0,
     name: '',
-    episode: null,
-    hour: null,
-    minute: null,
+    episode: 0,
+    hour: 0,
+    minute: 0,
     url: ''
   },
   contents: []

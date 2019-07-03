@@ -139,7 +139,7 @@
               </div>
               <div class="form-group form-row align-items-end">
                 <div class="col">
-                  <label>*選擇集數</label>
+                  <label>選擇集數</label>
                   <input
                     class="form-control"
                     placeholder="第幾集"
@@ -151,7 +151,7 @@
                   <button
                     type="button"
                     class="btn btn-outline-secondary"
-                    @click="input.episode > 1 ? input.episode-- : 1"
+                    @click="input.episode > 0 ? input.episode-- : 0"
                   >
                     -
                   </button>
@@ -165,7 +165,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="hour">*選擇小時</label>
+                <label for="hour">選擇小時</label>
                 <select
                   class="form-control"
                   id="hour"
@@ -175,7 +175,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="minute">*選擇分鐘</label>
+                <label for="minute">選擇分鐘</label>
                 <select
                   class="form-control"
                   id="minute"
