@@ -1,220 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="Shortcut Icon"
-      type="image/x-icon"
-      href="image/Record_Logo.png"
-    />
-    <meta
-      name="descriptffion"
-      content="看韓劇看電影總是忘記上次看到哪裡嗎?這個網頁能夠幫你紀錄這些問題。"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="css/vue2-animate.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>時間紀錄</title>
-  </head>
-  <body>
-    <div id="app" v-cloak>
-      <header-component></header-component>
-      <div class="container">
-        <div id="nothings" v-if="contents.length <= 0">沒有內容</div>
-        <div id="contents">
-          <transition-group
-            class="list-group list-group-flush my-5"
-            name="bounce"
-            enter-active-class="bounceInLeft"
-            leave-active-class="bounceOutRight"
-            tag="ul"
-          >
-            <li
-              class="list-group-item"
-              v-for="(item, index) in contents"
-              :key="item.id"
-            >
-              <div class="row align-self-center">
-                <list-title
-                  :class="haveVideo(index)"
-                  :item="item"
-                  :index="index"
-                  @handle="handleOpenVideo($event)"
-                ></list-title>
-                <list-main :item="item"></list-main>
-                <list-button
-                  :index="index"
-                  @handle1="openEditView($event)"
-                  @handle2="handleDelete($event)"
-                ></list-button>
-              </div>
-            </li>
-          </transition-group>
-        </div>
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="newDataModal"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
+
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="ie=edge"
+  />
+  <link
+    rel="Shortcut Icon"
+    type="image/x-icon"
+    href="image/Record_Logo.png"
+  />
+  <meta
+    name="descriptffion"
+    content="看影片、看劇或看電影總是忘記上次看到哪裡嗎?這個網頁能夠幫你紀錄這些問題。"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    href="css/vue2-animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  />
+  <title>紀錄時間</title>
+</head>
+
+<body>
+  <div
+    id="app"
+    v-cloak
+  >
+    <header-component></header-component>
+    <div class="container">
+      <div
+        id="nothings"
+        v-if="contents.length <= 0"
+      >沒有內容</div>
+      <div id="contents">
+        <transition-group
+          class="list-group list-group-flush my-5"
+          name="bounce"
+          enter-active-class="bounceInLeft"
+          leave-active-class="bounceOutRight"
+          tag="ul"
         >
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h2
-                  class="modal-title"
-                  id="exampleModalLabel"
-                  v-show="buttonState.add"
-                >
-                  輸入新資料
-                </h2>
-                <h2
-                  class="modal-title"
-                  id="exampleModalLabel"
-                  v-show="buttonState.edit"
-                >
-                  修改資料
-                </h2>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+          <li
+            class="list-group-item"
+            v-for="(item, index) in contents"
+            :key="item.id"
+          >
+            <div class="row align-self-center">
+              <list-title
+                :class="haveVideo(index)"
+                :item="item"
+                :index="index"
+                @handle="handleOpenVideo($event)"
+              ></list-title>
+              <list-main :item="item"></list-main>
+              <list-button
+                :index="index"
+                @handle1="openEditView($event)"
+                @handle2="handleDelete($event)"
+              ></list-button>
+            </div>
+          </li>
+        </transition-group>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="newDataModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2
+                class="modal-title"
+                id="exampleModalLabel"
+                v-show="buttonState.add"
+              >
+                輸入新資料
+              </h2>
+              <h2
+                class="modal-title"
+                id="exampleModalLabel"
+                v-show="buttonState.edit"
+              >
+                修改資料
+              </h2>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label>*輸入劇名</label>
+                <input
+                  class="form-control"
+                  placeholder="劇名"
+                  v-model.trim="input.name"
+                />
               </div>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label>*輸入劇名</label>
+              <div class="form-group form-row align-items-end">
+                <div class="col">
+                  <label>*選擇集數</label>
                   <input
                     class="form-control"
-                    placeholder="劇名"
-                    v-model.trim="input.name"
+                    placeholder="第幾集"
+                    type="number"
+                    v-model.trim="input.episode"
                   />
                 </div>
-                <div class="form-group form-row align-items-end">
-                  <div class="col">
-                    <label>*選擇集數</label>
-                    <input
-                      class="form-control"
-                      placeholder="第幾集"
-                      type="number"
-                      v-model.trim="input.episode"
-                    />
-                  </div>
-                  <div class="col">
-                    <button
-                      type="button"
-                      class="btn btn-outline-secondary"
-                      @click="input.episode > 1 ? input.episode-- : 1"
-                    >
-                      -
-                    </button>
-                    <button
-                      type="button"
-                      class="btn btn-outline-secondary"
-                      @click="input.episode++"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="hour">*選擇小時</label>
-                  <select class="form-control" id="hour" v-model="input.hour">
-                    <option v-for="item in makeHour">{{ item }}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="minute">*選擇分鐘</label>
-                  <select
-                    class="form-control"
-                    id="minute"
-                    v-model="input.minute"
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    @click="input.episode > 1 ? input.episode-- : 1"
                   >
-                    <option v-for="item in makeMinute">{{ item }}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="url">輸入網址</label>
-                  <input
-                    id="url"
-                    type="url"
-                    class="form-control"
-                    placeholder="網址"
-                    v-model.trim="input.url"
-                  />
+                    -
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    @click="input.episode++"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div
-                  class="alert alert-danger"
-                  role="alert"
-                  v-show="fromData.error"
+              <div class="form-group">
+                <label for="hour">*選擇小時</label>
+                <select
+                  class="form-control"
+                  id="hour"
+                  v-model="input.hour"
                 >
-                  除了網址，尚有資料未輸入!!
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-light"
-                  @click="handleClear"
-                  v-show="buttonState.add"
-                >
-                  清空
-                </button>
-                <button
-                  type="submit"
-                  class="btn btn-dark"
-                  @click="handleAdd"
-                  v-show="buttonState.add"
-                >
-                  確定新增
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-dark"
-                  @click="handleEdit"
-                  v-show="buttonState.edit"
-                >
-                  確定修改
-                </button>
+                  <option v-for="item in makeHour">{{ item }}</option>
+                </select>
               </div>
+              <div class="form-group">
+                <label for="minute">*選擇分鐘</label>
+                <select
+                  class="form-control"
+                  id="minute"
+                  v-model="input.minute"
+                >
+                  <option v-for="item in makeMinute">{{ item }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="url">輸入網址</label>
+                <input
+                  id="url"
+                  type="url"
+                  class="form-control"
+                  placeholder="網址"
+                  v-model.trim="input.url"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                v-show="fromData.error"
+              >
+                除了網址，尚有資料未輸入!!
+              </div>
+              <button
+                type="button"
+                class="btn btn-light"
+                @click="handleClear"
+                v-show="buttonState.add"
+              >
+                清空
+              </button>
+              <button
+                type="submit"
+                class="btn btn-dark"
+                @click="handleAdd"
+                v-show="buttonState.add"
+              >
+                確定新增
+              </button>
+              <button
+                type="button"
+                class="btn btn-dark"
+                @click="handleEdit"
+                v-show="buttonState.edit"
+              >
+                確定修改
+              </button>
             </div>
           </div>
         </div>
-        <!-- end of modal -->
       </div>
-      <!-- end of container -->
-      <footer-component></footer-component>
+      <!-- end of modal -->
     </div>
-    <!-- end of app -->
+    <!-- end of container -->
+    <footer-component></footer-component>
+  </div>
+  <!-- end of app -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
-    <script src="src/header.js"></script>
-    <script src="src/list/title.js"></script>
-    <script src="src/list/main.js"></script>
-    <script src="src/list/button.js"></script>
-    <script src="src/footer.js"></script>
-    <script src="src/script.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.21/vue.min.js"></script>
+  <script src="src/header.js"></script>
+  <script src="src/list/title.js"></script>
+  <script src="src/list/main.js"></script>
+  <script src="src/list/button.js"></script>
+  <script src="src/footer.js"></script>
+  <script src="src/script.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+    integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"
+  ></script>
+</body>
+
 </html>
