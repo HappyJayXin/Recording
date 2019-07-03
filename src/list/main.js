@@ -2,7 +2,7 @@ Vue.component('list-main', {
   props: ['item'],
   template: `
     <div class="col-md-3">
-      <h3 class="col-md-12 text-md-right text-center">
+      <h3 class="text-md-right text-center">
         {{ episodeHandle }}
         <template v-if="item.minute < 10">
           {{ item.hour }}:{{ '0' + item.minute }}
