@@ -1,4 +1,14 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+.button-delete-color {
+  background: #c90f23;
+  color: #fff;
+}
+
+.button-edit-color {
+  background: #004d73;
+  color: #fff;
+}
+
 [v-cloak] {
   display: none;
 }

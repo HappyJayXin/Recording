@@ -5,7 +5,7 @@ Vue.component('list-button', {
   <div class="row">
     <button
       type="button"
-      class="col col-md-5 btn btn-dark mr-1"
+      class="col col-md-5 btn mr-1 button-edit-color"
       @click="$emit('handle1', index)"
       data-toggle="modal"
       data-target="#newDataModal"
@@ -14,7 +14,7 @@ Vue.component('list-button', {
     </button>
     <button
       type="button"
-      class="col col-md-5 btn btn-danger"
+      class="col col-md-5 btn button-delete-color"
       @click="$emit('handle2', index)"
     >
       刪除

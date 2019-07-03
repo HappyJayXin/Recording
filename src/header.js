@@ -5,7 +5,7 @@ Vue.component('header-component', {
     <div>
       <button
         type="button"
-        class="btn"
+        class="btn button-edit-color"
         :class="buttonClass"
         @click="$emit('edit-drag'); dragEdit = !dragEdit"
       >        
@@ -13,7 +13,7 @@ Vue.component('header-component', {
       </button>
       <button
         type="button"
-        class="btn btn-dark"
+        class="btn button-edit-color"
         data-toggle="modal"
         data-target="#newDataModal"
       >
