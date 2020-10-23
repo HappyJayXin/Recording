@@ -39,7 +39,7 @@ let vm = new Vue({
         this.contents.push(this.input)
 
         $('#newDataModal').modal('hide')
-        this.claerInput()
+        this.clearInput()
         this.saveDataToLocalStorage()
       } else {
         this.fromData.error = true
@@ -79,7 +79,7 @@ let vm = new Vue({
         this.buttonState.add = true
         this.contents[this.buttonState.index] = this.input
 
-        this.claerInput()
+        this.clearInput()
         $('#newDataModal').modal('hide')
         this.saveDataToLocalStorage()
       } else {
@@ -91,7 +91,7 @@ let vm = new Vue({
       this.saveDataToLocalStorage()
     },
     handleClear() {
-      this.claerInput()
+      this.clearInput()
     },
     // Open new window
     handleOpenVideo(i) {
@@ -103,10 +103,10 @@ let vm = new Vue({
       // when leave clear input data
       $('#newDataModal').on('hide.bs.modal', () => {
         this.fromData.error = false
-        this.claerInput()
+        this.clearInput()
       })
     },
-    claerInput() {
+    clearInput() {
       this.input = {
         name: '',
         episode: 0,
