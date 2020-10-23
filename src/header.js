@@ -33,8 +33,7 @@ Vue.component('header-component', {
     },
     buttonClass() {
       return {
-        'btn-dark': !this.dragEdit,
-        'btn-outline-dark': this.dragEdit
+        'button-edit-color--dark': this.dragEdit,
       }
     }
   }

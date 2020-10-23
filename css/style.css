@@ -1,11 +1,16 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 .button-delete-color {
-  background: #c90f23;
+  background: #e74c3c;
   color: #fff;
 }
 
 .button-edit-color {
-  background: #004d73;
+  background: #3498db;
+  color: #fff;
+}
+
+.button-edit-color--dark {
+  background: #2980b9;
   color: #fff;
 }
 
@@ -26,12 +31,12 @@ body {
 
 ::-moz-selection {
   background: rgba(236, 240, 241, 0.5);
-  color: #000;
+  color: #2c3e50;
 }
 
 ::selection {
   background: rgba(236, 240, 241, 0.5);
-  color: #000;
+  color: #2c3e50;
 }
 
 .underLine {
