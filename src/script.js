@@ -109,9 +109,9 @@ let vm = new Vue({
     claerInput() {
       this.input = {
         name: '',
-        episode: null,
-        hour: null,
-        minute: null,
+        episode: 0,
+        hour: 0,
+        minute: 0,
         url: ''
       }
     },
@@ -142,7 +142,6 @@ let vm = new Vue({
     }
   },
   mounted() {
-    // localStorage.clear()
     // Get localStorage data
     if (localStorage.getItem('RecordData')) {
       this.contents = JSON.parse(localStorage.getItem('RecordData'))
